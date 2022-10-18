@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# 301 redirection set up
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Ngix HTTP'
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
+sudo tee /etc/nginx/sites-available/default <<EOF
+server {
+    rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 redirect;
+}
+EOF
+sudo service nginx start
